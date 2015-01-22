@@ -1169,7 +1169,7 @@ xd3_round_blksize (usize_t sz, usize_t blksz)
 #define A32_DO8(buf,i)  A32_DO4(buf,i); A32_DO4(buf,i+4);
 #define A32_DO16(buf)   A32_DO8(buf,0); A32_DO8(buf,8);
 
-static unsigned long adler32 (unsigned long adler, const uint8_t *buf, 
+static unsigned long adler32 (unsigned long adler, const uint8_t *buf,
 			      usize_t len)
 {
     unsigned long s1 = adler & 0xffff;
@@ -3597,7 +3597,7 @@ xd3_process_stream (int            is_encode,
 	case XD3_OUTPUT: { /* memcpy below */ break; }
 	case XD3_INPUT: {
 	  n = min(stream->winsize, input_size - ipos);
-	  if (n == 0) 
+	  if (n == 0)
 	    {
 	      goto done;
 	    }
@@ -3932,13 +3932,13 @@ xd3_srcwin_setup (xd3_stream *stream)
 
   if (src->eof_known)
     {
-      /* Note: if the source size is known, we must reduce srclen or 
+      /* Note: if the source size is known, we must reduce srclen or
        * code that expects to pass a single block w/ getblk == NULL
        * will not function, as the code will return GETSRCBLK asking
        * for the second block. */
       src->srclen = min (src->srclen, xd3_source_eof(src) - src->srcbase);
     }
-  
+
   IF_DEBUG1 (DP(RINT "[srcwin_setup_constrained] base %llu len %llu\n",
 		src->srcbase, src->srclen));
 

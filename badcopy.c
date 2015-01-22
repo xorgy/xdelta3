@@ -6,7 +6,7 @@
 
 #ifdef WIN32
 // whatever
-static 
+static
 double drand48() {
   double r = rand() / (double)RAND_MAX;
   return r;
@@ -72,12 +72,12 @@ void modify (char *buf, usize_t size)
 
       bufpos += next_mod;
 
-      fprintf (stderr, "COPY: %I64u-%I64u (%u)\n", 
-		  total_size + (xoff_t)last_end, 
-		  total_size + (xoff_t)bufpos, 
+      fprintf (stderr, "COPY: %I64u-%I64u (%u)\n",
+		  total_size + (xoff_t)last_end,
+		  total_size + (xoff_t)bufpos,
 		  bufpos - last_end);
-      fprintf (stderr, "ADD:  %I64u-%I64u (%u) is change %u\n", 
-		  total_size + (xoff_t)bufpos, 
+      fprintf (stderr, "ADD:  %I64u-%I64u (%u) is change %u\n",
+		  total_size + (xoff_t)bufpos,
 		  total_size + (xoff_t)(bufpos + next_size),
 		  next_size, num_change);
 
@@ -92,8 +92,8 @@ void modify (char *buf, usize_t size)
       last_end = bufpos;
     }
 
-  fprintf (stderr, "COPY: %I64u-%I64u (%u)\n", 
-	  total_size + last_end, 
+  fprintf (stderr, "COPY: %I64u-%I64u (%u)\n",
+	  total_size + last_end,
 	  total_size + size, size - last_end);
 
   total_size += size;

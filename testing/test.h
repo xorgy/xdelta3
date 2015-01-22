@@ -54,7 +54,7 @@ using std::cerr;
 using std::endl;
 using std::ostream;
 
-#include <map> 
+#include <map>
 using std::map;
 using std::pair;
 
@@ -68,5 +68,3 @@ pair<T, U> make_pair(const T& t, const U& u) {
 
 using std::min;
 using std::max;
-
-

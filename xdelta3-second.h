@@ -95,7 +95,7 @@ xd3_test_clean_bits (xd3_stream *stream, bit_state *bits)
 #endif
 
 static int
-xd3_get_secondary (xd3_stream *stream, xd3_sec_stream **sec_streamp, 
+xd3_get_secondary (xd3_stream *stream, xd3_sec_stream **sec_streamp,
 		   int is_encode)
 {
   if (*sec_streamp == NULL)

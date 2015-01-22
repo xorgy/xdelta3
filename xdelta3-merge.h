@@ -19,7 +19,7 @@
 #ifndef _XDELTA3_MERGE_H_
 #define _XDELTA3_MERGE_H_
 
-int xd3_merge_inputs (xd3_stream *stream, 
+int xd3_merge_inputs (xd3_stream *stream,
 		      xd3_whole_state *source,
 		      xd3_whole_state *input);
 
@@ -35,11 +35,11 @@ xd3_whole_state_init (xd3_stream *stream)
   stream->whole_target.inst_alloc = XD3_ALLOCSIZE;
   stream->whole_target.wininfo_alloc = XD3_ALLOCSIZE;
 
-  if ((stream->whole_target.adds = (uint8_t*) 
+  if ((stream->whole_target.adds = (uint8_t*)
        xd3_alloc (stream, stream->whole_target.adds_alloc, 1)) == NULL ||
-      (stream->whole_target.inst = (xd3_winst*) 
+      (stream->whole_target.inst = (xd3_winst*)
        xd3_alloc (stream, stream->whole_target.inst_alloc, 1)) == NULL ||
-      (stream->whole_target.wininfo = (xd3_wininfo*) 
+      (stream->whole_target.wininfo = (xd3_wininfo*)
        xd3_alloc (stream, stream->whole_target.wininfo_alloc, 1)) == NULL)
     {
       return ENOMEM;
@@ -48,7 +48,7 @@ xd3_whole_state_init (xd3_stream *stream)
 }
 
 static void
-xd3_swap_whole_state (xd3_whole_state *a, 
+xd3_swap_whole_state (xd3_whole_state *a,
 		      xd3_whole_state *b)
 {
   xd3_whole_state tmp;
@@ -111,14 +111,14 @@ xd3_whole_alloc_winst (xd3_stream *stream,
 {
   int ret;
 
-  if ((ret = xd3_realloc_buffer (stream, 
-				 stream->whole_target.instlen, 
-				 sizeof (xd3_winst), 
-				 1, 
-				 & stream->whole_target.inst_alloc, 
-				 (void**) & stream->whole_target.inst))) 
-    { 
-      return ret; 
+  if ((ret = xd3_realloc_buffer (stream,
+				 stream->whole_target.instlen,
+				 sizeof (xd3_winst),
+				 1,
+				 & stream->whole_target.inst_alloc,
+				 (void**) & stream->whole_target.inst)))
+    {
+      return ret;
     }
 
   *winstp = &stream->whole_target.inst[stream->whole_target.instlen++];
@@ -144,14 +144,14 @@ xd3_whole_alloc_wininfo (xd3_stream *stream,
 {
   int ret;
 
-  if ((ret = xd3_realloc_buffer (stream, 
-				 stream->whole_target.wininfolen, 
+  if ((ret = xd3_realloc_buffer (stream,
+				 stream->whole_target.wininfolen,
 				 sizeof (xd3_wininfo),
 				 1,
-				 & stream->whole_target.wininfo_alloc, 
-				 (void**) & stream->whole_target.wininfo))) 
-    { 
-      return ret; 
+				 & stream->whole_target.wininfo_alloc,
+				 (void**) & stream->whole_target.wininfo)))
+    {
+      return ret;
     }
 
   *wininfop = &stream->whole_target.wininfo[stream->whole_target.wininfolen++];
@@ -178,7 +178,7 @@ xd3_whole_append_inst (xd3_stream *stream,
   stream->whole_target.length += inst->size;
 
   if (((inst->type == XD3_ADD) || (inst->type == XD3_RUN)) &&
-      (ret = xd3_whole_alloc_adds (stream, 
+      (ret = xd3_whole_alloc_adds (stream,
 				   (inst->type == XD3_RUN ? 1 : inst->size))))
     {
       return ret;
@@ -209,8 +209,8 @@ xd3_whole_append_inst (xd3_stream *stream,
 	}
       else
 	{
-	  winst->addr = (stream->dec_winstart + 
-			 inst->addr - 
+	  winst->addr = (stream->dec_winstart +
+			 inst->addr -
 			 stream->dec_cpylen);
 	}
       break;
@@ -266,7 +266,7 @@ int xd3_merge_input_output (xd3_stream *stream,
   memset (& tmp_stream, 0, sizeof (tmp_stream));
   if ((ret = xd3_config_stream (& tmp_stream, NULL)) ||
       (ret = xd3_whole_state_init (& tmp_stream)) ||
-      (ret = xd3_merge_inputs (& tmp_stream, 
+      (ret = xd3_merge_inputs (& tmp_stream,
 			       source,
 			       & stream->whole_target)))
     {
@@ -305,7 +305,7 @@ xd3_merge_run (xd3_stream *stream,
   oinst->position = stream->whole_target.length;
   stream->whole_target.length += iinst->size;
 
-  stream->whole_target.adds[stream->whole_target.addslen++] = 
+  stream->whole_target.adds[stream->whole_target.addslen++] =
     target->adds[iinst->addr];
 
   return 0;
@@ -391,7 +391,7 @@ xd3_merge_find_position (xd3_stream *stream,
 	  high = mid;
 	  continue;
 	}
-      
+
       mid_hpos = mid_lpos + source->inst[mid].size;
 
       if (address >= mid_hpos)
@@ -421,7 +421,7 @@ xd3_merge_source_copy (xd3_stream *stream,
 
   XD3_ASSERT (iinst.mode == VCD_SOURCE);
 
-  if ((ret = xd3_merge_find_position (stream, source, 
+  if ((ret = xd3_merge_find_position (stream, source,
 				      iinst.addr, &sinst_num)))
     {
       return ret;
@@ -469,7 +469,7 @@ xd3_merge_source_copy (xd3_stream *stream,
 	    }
 
 	  minst->addr = stream->whole_target.addslen;
-	  stream->whole_target.adds[stream->whole_target.addslen++] = 
+	  stream->whole_target.adds[stream->whole_target.addslen++] =
 	    source->adds[sinst->addr];
 	  break;
 	case XD3_ADD:
@@ -507,7 +507,7 @@ xd3_merge_source_copy (xd3_stream *stream,
 	      stream->whole_target.instlen -= 1;
 
 	      if ((ret = xd3_merge_source_copy (stream, source, &tinst)))
-		{ 
+		{
 		  return ret;
 		}
 	    }
@@ -525,7 +525,7 @@ xd3_merge_source_copy (xd3_stream *stream,
 
 /* xd3_merge_inputs() applies *input to *source, returns its result in
  * stream. */
-int xd3_merge_inputs (xd3_stream *stream, 
+int xd3_merge_inputs (xd3_stream *stream,
 		      xd3_whole_state *source,
 		      xd3_whole_state *input)
 {
@@ -572,7 +572,7 @@ int xd3_merge_inputs (xd3_stream *stream,
 	  break;
 	}
     }
-  
+
   return ret;
 }
 

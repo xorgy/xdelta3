@@ -66,7 +66,7 @@ test2(const char *s1c, const char *s2c, int n)
 	     s1[i++] == s2[j++] &&
 	     s1[i++] == s2[j++] &&
 	     s1[i++] == s2[j++] &&
-	     s1[i++] == s2[j++] &&	 
+	     s1[i++] == s2[j++] &&
 	     s1[i++] == s2[j++]) { }
 
       i = (i - 1) * sizeof(int);

@@ -32,7 +32,7 @@ struct _xd3_lzma_stream {
   lzma_filter filters[2];
 };
 
-xd3_sec_stream* 
+xd3_sec_stream*
 xd3_lzma_alloc (xd3_stream *stream)
 {
   return (xd3_sec_stream*) xd3_alloc (stream, sizeof (xd3_lzma_stream), 1);
@@ -57,7 +57,7 @@ xd3_lzma_init (xd3_stream *stream, xd3_lzma_stream *sec, int is_encode)
     {
       int preset = (stream->flags & XD3_COMPLEVEL_MASK) >> XD3_COMPLEVEL_SHIFT;
 
-      if (lzma_lzma_preset(&sec->options, preset)) 
+      if (lzma_lzma_preset(&sec->options, preset))
 	{
 	  stream->msg = "invalid lzma preset";
 	  return XD3_INVALID;
@@ -69,11 +69,11 @@ xd3_lzma_init (xd3_stream *stream, xd3_lzma_stream *sec, int is_encode)
 
       ret = lzma_stream_encoder (&sec->lzma, &sec->filters[0], LZMA_CHECK_NONE);
     }
-  else 
+  else
     {
       ret = lzma_stream_decoder (&sec->lzma, UINT64_MAX, LZMA_TELL_NO_CHECK);
     }
-  
+
   if (ret != LZMA_OK)
     {
       stream->msg = "lzma stream init failed";
@@ -98,16 +98,16 @@ int xd3_decode_lzma (xd3_stream *stream, xd3_lzma_stream *sec,
   sec->lzma.next_in = input;
   sec->lzma.avail_out = avail_out;
   sec->lzma.next_out = output;
-  
-  while (1) 
+
+  while (1)
     {
       int lret = lzma_code (&sec->lzma, LZMA_RUN);
 
       switch (lret)
 	{
-	case LZMA_NO_CHECK: 
+	case LZMA_NO_CHECK:
 	case LZMA_OK:
-	  if (sec->lzma.avail_out == 0) 
+	  if (sec->lzma.avail_out == 0)
 	    {
 	      (*output_pos) = sec->lzma.next_out;
 	      (*input_pos) = sec->lzma.next_in;
@@ -124,8 +124,8 @@ int xd3_decode_lzma (xd3_stream *stream, xd3_lzma_stream *sec,
 
 #if XD3_ENCODER
 
-int xd3_encode_lzma (xd3_stream *stream, 
-		     xd3_lzma_stream *sec, 
+int xd3_encode_lzma (xd3_stream *stream,
+		     xd3_lzma_stream *sec,
 		     xd3_output   *input,
 		     xd3_output   *output,
 		     xd3_sec_cfg  *cfg)
@@ -147,7 +147,7 @@ int xd3_encode_lzma (xd3_stream *stream,
 	{
 	  sec->lzma.avail_in = input->next;
 	  sec->lzma.next_in = input->base;
-	  
+
 	  if ((input = input->next_page) == NULL)
 	    {
 	      action = LZMA_SYNC_FLUSH;
@@ -158,7 +158,7 @@ int xd3_encode_lzma (xd3_stream *stream,
 
       nwrite = (output->avail - output->next) - sec->lzma.avail_out;
 
-      if (nwrite != 0) 
+      if (nwrite != 0)
 	{
 	  output->next += nwrite;
 
@@ -168,7 +168,7 @@ int xd3_encode_lzma (xd3_stream *stream,
 		{
 		  return ENOMEM;
 		}
-	      
+
 	      sec->lzma.next_out = output->base;
 	      sec->lzma.avail_out = output->avail;
 	    }

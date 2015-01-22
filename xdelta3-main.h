@@ -649,16 +649,16 @@ static char*
 main_format_millis (long millis, shortbuf *buf)
 {
   if (millis < 1000)
-    { 
-      short_sprintf (*buf, "%lu ms", millis); 
+    {
+      short_sprintf (*buf, "%lu ms", millis);
     }
-  else if (millis < 10000) 
+  else if (millis < 10000)
     {
       short_sprintf (*buf, "%.1f sec", millis / 1000.0);
     }
   else
     {
-      short_sprintf (*buf, "%lu sec", millis / 1000L); 
+      short_sprintf (*buf, "%lu sec", millis / 1000L);
     }
   return buf->buf;
 }
@@ -724,7 +724,7 @@ main_atoux (const char* arg, xoff_t *xo, xoff_t low,
 
 static int
 main_atou (const char* arg, usize_t *uo, usize_t low,
-	   usize_t high, char which) 
+	   usize_t high, char which)
 {
   int ret;
   xoff_t xo;
@@ -2119,13 +2119,13 @@ main_waitpid_check(pid_t pid)
   else if (! WIFEXITED (status))
     {
       // SIGPIPE will be delivered to the child process whenever it
-      // writes data after this process closes the pipe, 
-      // happens if xdelta does not require access to the entire 
+      // writes data after this process closes the pipe,
+      // happens if xdelta does not require access to the entire
       // source file.  Considered normal.
-      if (! WIFSIGNALED (status) || WTERMSIG (status) != SIGPIPE) 
+      if (! WIFSIGNALED (status) || WTERMSIG (status) != SIGPIPE)
 	{
 	  ret = ECHILD;
-	  XPR(NT "external compression [pid %d] signal %d\n", pid, 
+	  XPR(NT "external compression [pid %d] signal %d\n", pid,
 	      WIFSIGNALED (status) ? WTERMSIG (status) : WSTOPSIG (status));
 	}
       else if (option_verbose)
