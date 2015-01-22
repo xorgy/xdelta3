@@ -7,7 +7,7 @@
 #undef MT_IA
 class MTRandom {
  public:
-  enum Constants { 
+  enum Constants {
     MT_LEN = 624,
     MT_IA = 397
   };
@@ -27,7 +27,7 @@ class MTRandom {
 
   uint32_t Rand32 () {
     uint32_t y;
-    static unsigned long mag01[2] = { 
+    static unsigned long mag01[2] = {
       0 , MATRIX_A
     };
 
@@ -47,7 +47,7 @@ class MTRandom {
 
       mt_index_ = 0;
     }
-  
+
     y = mt_buffer_[mt_index_++];
 
     y ^= (y >> 11);
@@ -111,7 +111,7 @@ class MTRandom {
       /* In the previous versions, MSBs of the seed affect   */
       /* only MSBs of the array mt[].                        */
       /* 2002/01/09 modified by Makoto Matsumoto             */
-      mt_buffer_[i] = 
+      mt_buffer_[i] =
 	(1812433253UL * (mt_buffer_[i-1] ^ (mt_buffer_[i-1] >> 30)) + i);
     }
   }

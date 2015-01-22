@@ -107,7 +107,7 @@ struct _fgk_stream
 
 static fgk_stream*     fgk_alloc           (xd3_stream *stream /*, usize_t alphabet_size */);
 static int             fgk_init            (xd3_stream *stream,
-					    fgk_stream *h, 
+					    fgk_stream *h,
 					    int is_encode);
 static int             fgk_encode_data     (fgk_stream *h,
 					    usize_t    n);
@@ -422,7 +422,7 @@ static void fgk_promote (fgk_stream *h, fgk_node *node)
     {
       XD3_ASSERT (node->left_child == h->remaining_zeros);
       XD3_ASSERT (node->right_child->weight == (node->weight+1)); /* child weight was already incremented */
-      
+
       if (node->weight == (my_right->weight - 1) && my_right != h->root_node)
 	{
 	  fgk_free_block (h, cur_block);
@@ -742,7 +742,7 @@ static int fgk_decode_data (fgk_stream* h)
     usize_t i = 0;
     usize_t n = 0;
 
-    if (h->coded_depth > 0) 
+    if (h->coded_depth > 0)
       {
 	for (; i < h->coded_depth - 1; i += 1)
 	  {

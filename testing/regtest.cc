@@ -327,7 +327,7 @@ public:
     return ret;
   }
 
-  void EncodeDecodeAPI(const FileSpec &spec0, const FileSpec &spec1, 
+  void EncodeDecodeAPI(const FileSpec &spec0, const FileSpec &spec1,
 		       Block *delta, const Options &options) {
     Block from;
     Block to;

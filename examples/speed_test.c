@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
   exit:
     ret = 1;
   }
-    
+
   main_free(to_buf);
   main_free(from_buf);
   main_free(delta_buf);

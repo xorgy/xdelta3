@@ -102,7 +102,7 @@ struct rabin_karp {
     typedef Hash hash_type;
 
     enum { cksum_size = CksumSize,
-	   cksum_skip = CksumSkip, 
+	   cksum_skip = CksumSkip,
 	   compaction = Compaction,
     };
 
@@ -154,7 +154,7 @@ struct adler32_cksum {
     typedef Hash hash_type;
 
     enum { cksum_size = CksumSize,
-	   cksum_skip = CksumSkip, 
+	   cksum_skip = CksumSkip,
 	   compaction = Compaction,
     };
 
@@ -276,7 +276,7 @@ struct test_result : public test_result_base {
     typedef Hash hash_type;
 
     enum { cksum_size = CksumSize,
-	   cksum_skip = CksumSkip, 
+	   cksum_skip = CksumSkip,
 	   compaction = Compaction,
     };
 
@@ -520,7 +520,7 @@ struct test_result : public test_result_base {
 	    } else {
 		ptr = buf + last_offset;
 		end = buf + stop;
-		
+
 		for (; ptr != end; ptr -= cksum_skip) {
 		    fstats.update(hash(test.step(ptr), s_bits, s_mask), ptr);
 		}
@@ -619,7 +619,7 @@ int main(int argc, char** argv) {
   TEST(uint32_t, 9, SKIP, plain, hhash, 1); /* x */ \
   TEST(uint32_t, 9, SKIP, plain, hhash, 2); /* x */ \
   TEST(uint32_t, 9, SKIP, plain, hhash, 3)
-  
+
 #define TESTS_ALL(SKIP) \
   TEST(uint32_t, 3, SKIP, plain, hhash, 0); \
   TEST(uint32_t, 3, SKIP, plain, hhash, 1); \
@@ -714,19 +714,19 @@ int main(int argc, char** argv) {
 // 	 i != all_tests.end(); ++i) {
 // 	test_result_base *test = *i;
 // 	test->set_score(min_compression, min_time);
-//     }	
+//     }
 
 //     sort(all_tests.begin(), all_tests.end(), compare_h());
-    
+
 //     for (vector<test_result_base*>::iterator i = all_tests.begin();
 // 	 i != all_tests.end(); ++i) {
 // 	test_result_base *test = *i;
 // 	test->print();
-//     }	
-    
+//     }
+
     free(buf);
     buf = NULL;
   }
 
-  return 0;      
+  return 0;
 }

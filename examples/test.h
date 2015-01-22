@@ -24,7 +24,7 @@ static int read_whole_file(const char *name,
     fprintf(stderr, "stat failed\n");
     goto exit;
   }
-  
+
   (*buf_len) = (size_t)len;
   (*buf_ptr) = (uint8_t*) main_malloc(*buf_len);
   ret = main_file_read(&file, *buf_ptr, *buf_len, &nread,
@@ -39,4 +39,3 @@ static int read_whole_file(const char *name,
   main_file_cleanup(&file);
   return ret;
 }
-

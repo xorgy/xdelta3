@@ -63,7 +63,7 @@
 #define RUN_1                1U
 
 /* Number of code lengths always encoded (djw_encode_basic array) */
-#define DJW_BASIC_CODES      5U  
+#define DJW_BASIC_CODES      5U
 #define DJW_RUN_CODES        2U  /* Number of run codes */
 
 /* Offset of extra codes */
@@ -73,7 +73,7 @@
 #define DJW_EXTRA_CODES      15U
 
 /* Number of bits to code [0-DJW_EXTRA_CODES] */
-#define DJW_EXTRA_CODE_BITS  4U  
+#define DJW_EXTRA_CODE_BITS  4U
 
 #define DJW_MAX_GROUPS       8U  /* Max number of group coding tables */
 #define DJW_GROUP_BITS       3U  /* Number of bits to code [1-DJW_MAX_GROUPS] */
@@ -85,13 +85,13 @@
 /* Maximum number of iterations to find group tables. */
 #define DJW_MAX_ITER         6U
 /* Minimum number of bits an iteration must reduce coding by. */
-#define DJW_MIN_IMPROVEMENT  20U 
+#define DJW_MIN_IMPROVEMENT  20U
 
 /* Maximum code length of a prefix code length */
 #define DJW_MAX_CLCLEN       15U
 
 /* Number of bits to code [0-DJW_MAX_CLCLEN] */
-#define DJW_CLCLEN_BITS      4U  
+#define DJW_CLCLEN_BITS      4U
 
 #define DJW_MAX_GBCLEN       7U  /* Maximum code length of a group selector */
 
@@ -200,7 +200,7 @@ static const uint8_t djw_encode_12basic[DJW_BASIC_CODES] =
 /*********************************************************************/
 
 static djw_stream*     djw_alloc           (xd3_stream *stream);
-static int             djw_init            (xd3_stream *stream, 
+static int             djw_init            (xd3_stream *stream,
 					    djw_stream *h,
 					    int is_encode);
 static void            djw_destroy         (xd3_stream *stream,
@@ -344,7 +344,7 @@ djw_update_1_2 (int *mtf_run, usize_t *mtf_i,
 		uint8_t *mtfsym, djw_weight *freq)
 {
   int code;
-  
+
   do
     {
       /* Offset by 1, since any number of RUN_ symbols implies run>0... */
@@ -538,7 +538,7 @@ djw_build_codes (usize_t *codes, const uint8_t *clen, usize_t asize, usize_t abs
 	  if (clen[i] == l)
 	    {
 	      codes[i] = code++;
-	    } 
+	    }
 	}
 
       code <<= 1;
@@ -648,7 +648,7 @@ djw_compute_multi_prefix (usize_t     groups,
 			  djw_prefix *prefix)
 {
   usize_t gp, i;
-      
+
   prefix->scount = ALPHABET_SIZE;
   memcpy (prefix->symbol, clen[0], ALPHABET_SIZE);
 
@@ -1097,10 +1097,10 @@ xd3_encode_huff (xd3_stream   *stream,
 	  best = USIZE_T_MAX;
 	  for (gp = 0; gp < groups; gp += 1)
 	    {
-	      if (gcost[gp] < best) 
-		{ 
-		  best = gcost[gp]; 
-		  winner = gp; 
+	      if (gcost[gp] < best)
+		{
+		  best = gcost[gp];
+		  winner = gp;
 		}
 	    }
 
@@ -1554,7 +1554,7 @@ djw_decode_1_2 (xd3_stream     *stream,
 {
   usize_t n = 0, rep = 0, mtf = 0, s = 0;
   int ret;
-  
+
   while (n < elts)
     {
       /* Special case inside generic code: CLEN only: If not the first group,
@@ -1608,7 +1608,7 @@ djw_decode_1_2 (xd3_stream     *stream,
       stream->msg = "secondary decoder invalid repeat code";
       return XD3_INTERNAL;
     }
-  
+
   return 0;
 }
 
@@ -1672,7 +1672,7 @@ xd3_decode_huff (xd3_stream     *stream,
       if ((ret = xd3_decode_bits (stream, & bstate, & input,
 				  input_end, DJW_SECTORSZ_BITS,
 				  & sector_size))) { goto fail; }
-      
+
       sector_size = (sector_size + 1) * DJW_SECTORSZ_MULT;
     }
   else
@@ -1772,7 +1772,7 @@ xd3_decode_huff (xd3_stream     *stream,
       /* Now decode each sector. */
       {
 	/* Initialize for (groups==1) case. */
-	uint8_t *gp_inorder = inorder[0]; 
+	uint8_t *gp_inorder = inorder[0];
 	usize_t *gp_base    = base[0];
 	usize_t *gp_limit   = limit[0];
 	usize_t  gp_minlen  = minlen[0];
@@ -1797,7 +1797,7 @@ xd3_decode_huff (xd3_stream     *stream,
 	      }
 
 	    XD3_ASSERT (output_end - output > 0);
-	    
+
 	    /* Decode next sector. */
 	    n = min (sector_size, (usize_t) (output_end - output));
 

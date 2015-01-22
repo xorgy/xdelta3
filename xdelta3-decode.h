@@ -400,7 +400,7 @@ xd3_decode_output_halfinst (xd3_stream *stream, xd3_hinst *inst)
 	     * current decoder window, the first (VCD_TARGET) is
 	     * unimplemented. */
 	    overlap = 0;
-	    
+
 	    /* This branch sets "src".  As a side-effect, we modify
 	     * "inst" so that if we reenter this method after a
 	     * XD3_GETSRCBLK response the state is correct.  So if the
@@ -1071,7 +1071,7 @@ xd3_decode_input (xd3_stream *stream)
 	  xd3_blksize_div(stream->dec_cpyoff, src,
 			  &src->cpyoff_blocks,
 			  &src->cpyoff_blkoff);
-	  
+
 	  IF_DEBUG1(DP(RINT
 		       "decode cpyoff %"Q"u "
 		       "cpyblkno %"Q"u "

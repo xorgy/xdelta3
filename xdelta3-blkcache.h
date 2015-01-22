@@ -550,7 +550,7 @@ main_getblk_func (xd3_stream *stream,
       else
 	{
 	  XPR(NT "source block %"Q"u read %zu (lru_hits=%u, lru_misses=%u, "
-	      "lru_filled=%u)\n", blkno, nread, 
+	      "lru_filled=%u)\n", blkno, nread,
 	      lru_hits, lru_misses, lru_filled);
 	}
     }

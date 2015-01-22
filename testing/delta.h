@@ -17,7 +17,7 @@ public:
     bool done = false;
     while (!done) {
       ret = xd3_decode_input(&stream_);
-    
+
       switch (ret) {
       case XD3_INPUT:
 	done = true;
@@ -52,14 +52,14 @@ public:
     for (size_t i = 0; i < stream_.whole_target.instlen; i++) {
       xd3_winst &winst = stream_.whole_target.inst[i];
       switch (winst.type) {
-      case XD3_RUN: 
+      case XD3_RUN:
 	DP(RINT "%"Q"u run %u\n", winst.position, winst.size);
 	break;
-      case XD3_ADD: 
+      case XD3_ADD:
 	DP(RINT "%"Q"u add %u\n", winst.position, winst.size);
 	break;
       default:
-	DP(RINT "%"Q"u copy %u @ %"Q"u (mode %u)\n", 
+	DP(RINT "%"Q"u copy %u @ %"Q"u (mode %u)\n",
 	   winst.position, winst.size, winst.addr, winst.mode);
 	break;
       }

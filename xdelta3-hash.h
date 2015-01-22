@@ -145,7 +145,7 @@ xd3_size_log2 (usize_t slots)
 	{
 	  /* TODO: this is compaction=1 in checksum_test.cc and maybe should
 	   * not be fixed at -1. */
-	  bits = i - 1; 
+	  bits = i - 1;
 	  break;
 	}
     }

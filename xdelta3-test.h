@@ -2383,7 +2383,7 @@ test_appheader (xd3_stream *stream, int ignore)
     }
   bogus[TESTBUFSIZE/2-1] = 0;
 
-  snprintf_func (buf, TESTBUFSIZE, 
+  snprintf_func (buf, TESTBUFSIZE,
 		 "%s -q -f -A=%s -e -s %s %s %s", program_name, bogus,
 		 TEST_SOURCE_FILE, TEST_TARGET_FILE, TEST_DELTA_FILE);
   if ((ret = do_cmd (stream, buf))) { return ret; }
@@ -2391,8 +2391,8 @@ test_appheader (xd3_stream *stream, int ignore)
   snprintf_func (buf, TESTBUFSIZE, "(cd /tmp && %s -q -f -d %s)",
 		 TEST_RECON2_FILE,
 		 TEST_DELTA_FILE);
-  if ((ret = do_cmd (stream, buf)) == 0) 
-    { 
+  if ((ret = do_cmd (stream, buf)) == 0)
+    {
       return XD3_INVALID;  // Impossible
     }
   if (!WIFEXITED(ret))

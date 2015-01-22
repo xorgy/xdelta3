@@ -1,7 +1,7 @@
 /* -*- Mode: C++ -*-  */
 static size_t CmpDifferentBlockBytes(const Block &a, const Block &b) {
   size_t total = 0;
-  size_t i = 0; 
+  size_t i = 0;
   size_t m = min(a.Size(), b.Size());
 
   for (; i < m; i++) {

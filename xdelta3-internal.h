@@ -38,7 +38,7 @@ int main_file_read (main_file  *ifile,
 		    size_t     size,
 		    size_t    *nread,
 		    const char *msg);
-int main_file_write (main_file *ofile, uint8_t *buf, 
+int main_file_write (main_file *ofile, uint8_t *buf,
 		     usize_t size, const char *msg);
 int test_compare_files (const char* f0, const char* f1);
 usize_t xd3_bytes_on_srcblk (xd3_source *src, xoff_t blkno);
